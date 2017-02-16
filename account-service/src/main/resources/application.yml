@@ -1,2 +1,6 @@
 server:  
   port: ${PORT:2222}
+  
+spring:  
+  application:
+    name: account-service  
