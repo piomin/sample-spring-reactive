@@ -36,7 +36,7 @@ public class AccountController {
 	}
 
 	@GetMapping(value = "/account/{id}")
-	public Mono<Account> findById(@PathVariable("id") Integer id) {
+	public Mono<Account> findById(@PathVariable("id") String id) {
 		return repository.findById(id)
 				.map(a -> new Account(a.getId(), a.getCustomerId(), a.getNumber(), a.getAmount()));
 	}

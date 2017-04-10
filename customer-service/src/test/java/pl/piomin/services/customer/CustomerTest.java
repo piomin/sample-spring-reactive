@@ -5,7 +5,7 @@ import java.util.logging.Logger;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.boot.context.embedded.LocalServerPort;
+import org.springframework.boot.web.server.LocalServerPort; 
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -42,7 +42,8 @@ public class CustomerTest {
 	public void addCustomer() {
 		Customer customer = new Customer(null, "Adam", "Kowalski", "123456787654");
 		customer = webClient.post().uri("/customer").accept(MediaType.APPLICATION_JSON)
-				.exchange(BodyInserters.fromObject(customer)).then(response -> response.bodyToMono(Customer.class))
+				.body(BodyInserters.fromObject(customer))
+				.exchange().then(response -> response.bodyToMono(Customer.class))
 				.block();
 		logger.info("Customer: " + customer);
 	}
