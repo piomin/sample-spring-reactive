@@ -22,7 +22,7 @@ public class Application {
 	}
 
 	public @Bean MongoClient mongoClient() {
-		return MongoClients.create("mongodb://localhost");
+		return MongoClients.create("mongodb://"  + mongoHost);
 	}
 
 	public @Bean ReactiveMongoTemplate reactiveMongoTemplate() {
