@@ -5,32 +5,6 @@
 	<artifactId>sample-spring-reactive</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
-<repositories>
-<repository>
-    <id>spring-snapshot</id>
-    <name>Spring Snapshot Repository</name>
-    <url>https://repo.spring.io/snapshot</url>
-    <snapshots>
-        <enabled>true</enabled>
-    </snapshots>
-</repository>
-<repository>
-    <id>spring-milestone</id>
-    <name>Spring Milestone Repository</name>
-    <url>https://repo.spring.io/milestone</url>
-</repository>
-
-</repositories>
-<pluginRepositories>
-<pluginRepository>
-    <id>spring-snapshot</id>
-    <name>Spring Snapshot Repository</name>
-    <url>https://repo.spring.io/snapshot</url>
-    <snapshots>
-        <enabled>true</enabled>
-    </snapshots>
-</pluginRepository>
-</pluginRepositories>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
