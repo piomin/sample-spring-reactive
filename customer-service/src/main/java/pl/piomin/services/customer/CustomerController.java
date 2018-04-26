@@ -41,8 +41,9 @@ public class CustomerController {
 
 	@GetMapping(value = "/customer/accounts/{pesel}")
 	public Mono<Customer> findByPeselWithAccounts(@PathVariable("pesel") String pesel) {
-		return repository.findByPesel(pesel).log().flatMap(customer -> webClient.get().uri("/account/customer/{customer}", customer.getId()).accept(MediaType.APPLICATION_JSON)
-				.exchange().log().flatMap(response -> response.bodyToFlux(Account.class))).collectList().map(l -> {return new Customer(pesel, l);});
+		return null;
+//		return repository.findByPesel(pesel).log().flatMap(customer -> webClient.get().uri("/account/customer/{customer}", customer.getId()).accept(MediaType.APPLICATION_JSON)
+//				.exchange().log().flatMap(response -> response.bodyToFlux(Account.class))).collectList().map(l -> {return new Customer(pesel, l);});
 	}
 
 	@PostMapping(value = "/customer")

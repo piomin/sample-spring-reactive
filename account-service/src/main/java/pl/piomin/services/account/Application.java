@@ -9,6 +9,7 @@ import com.mongodb.reactivestreams.client.MongoClient;
 import com.mongodb.reactivestreams.client.MongoClients;
 
 @SpringBootApplication
+//@EnableDiscoveryClient
 public class Application {
 
 	public static void main(String[] args) {

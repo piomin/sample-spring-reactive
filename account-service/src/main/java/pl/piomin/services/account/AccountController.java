@@ -18,14 +18,14 @@ import reactor.core.publisher.Mono;
 @RestController
 public class AccountController {
 
-	private static final Logger logger = Logger.getLogger(AccountController.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(AccountController.class.getName());
 	
 	@Autowired
 	private AccountRepository repository;
 
 	@GetMapping(value = "/account/customer/{customer}")
 	public Flux<Account> findByCustomer(@PathVariable("customer") String customerId) {
-		logger.info("findByCustomer: " + customerId);
+		LOGGER.info("findByCustomer: " + customerId);
 		return repository.findByCustomerId(customerId)
 				.map(a -> new Account(a.getId(), a.getCustomerId(), a.getNumber(), a.getAmount()));
 	}
