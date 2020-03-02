@@ -16,7 +16,7 @@ public class AccountRepository {
 	@Autowired
 	private ReactiveMongoTemplate template;
 
-	public Mono<Account> findById(Integer id) {
+	public Mono<Account> findById(String id) {
 		return template.findById(id, Account.class);
 	}
 
