@@ -6,4 +6,9 @@
     <version>1.0-SNAPSHOT</version>
   </parent>
   <artifactId>common</artifactId>
+
+  <properties>
+    <sonar.moduleKey>${project.artifactId}</sonar.moduleKey>
+  </properties>
+
 </project>
