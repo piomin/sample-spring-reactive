@@ -17,13 +17,13 @@ public class CustomerApplication {
         SpringApplication.run(CustomerApplication.class, args);
     }
 
-    public @Bean MongoClient mongoClient() {
-        return MongoClients.create("mongodb://192.168.99.100");
-    }
-
-    public @Bean ReactiveMongoTemplate reactiveMongoTemplate() {
-        return new ReactiveMongoTemplate(mongoClient(), "test");
-    }
+//    public @Bean MongoClient mongoClient() {
+//        return MongoClients.create("mongodb://192.168.99.100");
+//    }
+//
+//    public @Bean ReactiveMongoTemplate reactiveMongoTemplate() {
+//        return new ReactiveMongoTemplate(mongoClient(), "test");
+//    }
 
     public @Bean WebClient webClient() {
         return WebClient.builder().clientConnector(new ReactorClientHttpConnector()).baseUrl("http://localhost:2222").build();
