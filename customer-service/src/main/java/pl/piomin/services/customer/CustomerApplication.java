@@ -11,10 +11,10 @@ import com.mongodb.reactivestreams.client.MongoClient;
 import com.mongodb.reactivestreams.client.MongoClients;
 
 @SpringBootApplication
-public class Application {
+public class CustomerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        SpringApplication.run(CustomerApplication.class, args);
     }
 
     public @Bean MongoClient mongoClient() {
