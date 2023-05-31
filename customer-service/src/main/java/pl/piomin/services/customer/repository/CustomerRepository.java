@@ -14,23 +14,23 @@ import reactor.core.publisher.Mono;
 @Repository
 public class CustomerRepository {
 
-	@Autowired
-	private ReactiveMongoTemplate template;
+    @Autowired
+    private ReactiveMongoTemplate template;
 
-	public Mono<Customer> findById(String id) {
-		return template.findById(id, Customer.class);
-	}
+    public Mono<Customer> findById(String id) {
+        return template.findById(id, Customer.class);
+    }
 
-	public Mono<Customer> findByPesel(String pesel) {
-		return template.findOne(query(where("pesel").is(pesel)), Customer.class);
-	}
-	
-	public Flux<Customer> findAll() {
-		return template.findAll(Customer.class);
-	}
+    public Mono<Customer> findByPesel(String pesel) {
+        return template.findOne(query(where("pesel").is(pesel)), Customer.class);
+    }
 
-	public Mono<Customer> save(Mono<Customer> customer) {
-		return template.insert(customer);
-	}
-	
+    public Flux<Customer> findAll() {
+        return template.findAll(Customer.class);
+    }
+
+    public Mono<Customer> save(Mono<Customer> customer) {
+        return template.insert(customer);
+    }
+
 }

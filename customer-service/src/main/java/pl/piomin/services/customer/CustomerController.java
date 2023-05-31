@@ -21,42 +21,42 @@ import reactor.core.publisher.Mono;
 @RestController
 public class CustomerController {
 
-	private static final Logger logger = Logger.getLogger(CustomerController.class.getName());
+    private static final Logger logger = Logger.getLogger(CustomerController.class.getName());
 
-	@Autowired
-	private CustomerRepository repository;
-	@Autowired
-	private WebClient webClient;
+    @Autowired
+    private CustomerRepository repository;
+    @Autowired
+    private WebClient webClient;
 
-	@GetMapping(value = "/customer/{id}")
-	public Mono<Customer> findById(@PathVariable("id") String id) {
-		return repository.findById(id)
-				.map(c -> new Customer(c.getId(), c.getFirstName(), c.getLastName(), c.getPesel()));
-	}
+    @GetMapping(value = "/customer/{id}")
+    public Mono<Customer> findById(@PathVariable("id") String id) {
+        return repository.findById(id)
+                .map(c -> new Customer(c.getId(), c.getFirstName(), c.getLastName(), c.getPesel()));
+    }
 
-	@GetMapping(value = "/customer")
-	public Flux<Customer> findAll() {
-		return repository.findAll().map(c -> new Customer(c.getId(), c.getFirstName(), c.getLastName(), c.getPesel()));
-	}
+    @GetMapping(value = "/customer")
+    public Flux<Customer> findAll() {
+        return repository.findAll().map(c -> new Customer(c.getId(), c.getFirstName(), c.getLastName(), c.getPesel()));
+    }
 
-	@GetMapping(value = "/customer/accounts/{pesel}")
-	public Mono<Customer> findByPeselWithAccounts(@PathVariable("pesel") String pesel) {
-		return repository.findByPesel(pesel).log()
-				.flatMap(customer -> webClient.get()
-						.uri("/account/customer/{customer}", customer.getId())
-						.accept(MediaType.APPLICATION_JSON)
-						.exchange().log()
-						.flatMap(response -> response.bodyToFlux(Account.class)
-								.collectList()
-								.map(l -> new Customer(pesel, l))));
-	}
+    @GetMapping(value = "/customer/accounts/{pesel}")
+    public Mono<Customer> findByPeselWithAccounts(@PathVariable("pesel") String pesel) {
+        return repository.findByPesel(pesel).log()
+                .flatMap(customer -> webClient.get()
+                        .uri("/account/customer/{customer}", customer.getId())
+                        .accept(MediaType.APPLICATION_JSON)
+                        .exchange().log()
+                        .flatMap(response -> response.bodyToFlux(Account.class)
+                                .collectList()
+                                .map(l -> new Customer(pesel, l))));
+    }
 
-	@PostMapping(value = "/customer")
-	public Mono<Customer> create(@RequestBody Publisher<Customer> customerStream) {
-		logger.info("Create customer");
-		return repository.save(Mono.from(customerStream)
-						.map(a -> new pl.piomin.services.customer.model.Customer(a.getFirstName(), a.getLastName(),
-								a.getPesel())))
-				.map(a -> new Customer(a.getId(), a.getFirstName(), a.getLastName(), a.getPesel()));
-	}
+    @PostMapping(value = "/customer")
+    public Mono<Customer> create(@RequestBody Publisher<Customer> customerStream) {
+        logger.info("Create customer");
+        return repository.save(Mono.from(customerStream)
+                        .map(a -> new pl.piomin.services.customer.model.Customer(a.getFirstName(), a.getLastName(),
+                                a.getPesel())))
+                .map(a -> new Customer(a.getId(), a.getFirstName(), a.getLastName(), a.getPesel()));
+    }
 }
