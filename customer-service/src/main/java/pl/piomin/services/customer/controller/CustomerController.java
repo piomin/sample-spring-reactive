@@ -38,10 +38,10 @@ public class CustomerController {
                 .flatMap(customer -> webClient.get()
                         .uri("/account/customer/{customer}", customer.getId())
                         .accept(MediaType.APPLICATION_JSON)
-                        .exchange().log()
-                        .flatMap(response -> response.bodyToFlux(Account.class)
+                        .exchangeToMono(response -> response.bodyToFlux(Account.class)
                                 .collectList()
-                                .map(l -> new pl.piomin.services.common.Customer(pesel, l))));
+                                .map(l -> new pl.piomin.services.common.Customer(pesel, l)))
+                        .log());
     }
 
     @PostMapping(value = "/customer")

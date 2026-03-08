@@ -11,7 +11,7 @@ public class MongoContainerDevMode {
     @Bean
     @ServiceConnection
     public MongoDBContainer mongodb () {
-        return new MongoDBContainer("mongo:5.0");
+        return new MongoDBContainer("mongo:8.2-noble");
     }
 
 }
